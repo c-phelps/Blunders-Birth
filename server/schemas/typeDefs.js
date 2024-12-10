@@ -6,9 +6,17 @@ const typeDefs = `
         pgn: String
         fen: String
     }
+    enum SortOrder {
+        ASC
+        DESC
+    }
+    input OrderByInput {
+        name: SortOrder
+        eco: SortOrder
+    }
 
     type Query {
-        findMainLineOpenings() [Opening]
+        findMainLineOpenings(orderBy: OrderByInput): [Opening]
     }
 `;
 

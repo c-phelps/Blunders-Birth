@@ -25,7 +25,7 @@ const startApolloServer = async () => {
   // static image assets
   app.use("/images", express.static(path.join(__dirname, "../client/images")));
 
-  app.use("graphql", expressMiddleware(server));
+  app.use("/graphql", expressMiddleware(server));
 
   //   determine if we need to retrieve files from dist folder when environment = production
   if (process.env.NODE_ENV === "production") {

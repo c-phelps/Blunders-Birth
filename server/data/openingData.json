@@ -26,7 +26,8 @@
   {
     "eco": "A00",
     "name": "Anderssen's Opening",
-    "pgn": "1. a3",
+    "pgn": "1. a3", 
+    
     "fen": "rnbqkbnr/pppppppp/8/8/8/P7/1PPPPPPP/RNBQKBNR b KQkq - 0 1"
   },
   {
@@ -4366,9 +4367,6 @@
     "name": "Dutch Defense: Classical Variation, Ilyin-Zhenevsky Variation, Modern Main Line",
     "pgn": "1. d4 f5 2. c4 Nf6 3. g3 e6 4. Bg2 Be7 5. Nf3 O-O 6. O-O d6 7. Nc3 Qe8 8. b3",
     "fen": "rnb1qrk1/ppp1b1pp/3ppn2/5p2/2PP4/1PN2NP1/P3PPBP/R1BQ1RK1 b - - 0 8"
-  },
-  {
-    "eco": ""
   },
   {
     "eco": "B00",
@@ -8833,9 +8831,6 @@
     "name": "Sicilian Defense: Najdorf Variation, Main Line",
     "pgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Bg5 e6 7. f4 Be7 8. Qf3 Qc7 9. O-O-O Nbd7",
     "fen": "r1b1k2r/1pqnbppp/p2ppn2/6B1/3NPP2/2N2Q2/PPP3PP/2KR1B1R w kq - 5 10"
-  },
-  {
-    "eco": ""
   },
   {
     "eco": "C00",
@@ -15972,9 +15967,6 @@
     "fen": "r1b2rk1/2q1bppp/p2p1n2/np2p3/3PP3/5N1P/PPBN1PP1/R1BQR1K1 b - - 0 13"
   },
   {
-    "eco": ""
-  },
-  {
     "eco": "D00",
     "name": "Amazon Attack",
     "pgn": "1. d4 d5 2. Qd3",
@@ -19137,9 +19129,6 @@
     "fen": "rn1q1rk1/pp1nppbp/6p1/2p5/3PP1b1/1QN1BN2/PP3PPP/R3KB1R w KQ - 0 10"
   },
   {
-    "eco": ""
-  },
-  {
     "eco": "E00",
     "name": "Catalan Opening",
     "pgn": "1. d4 Nf6 2. c4 e6 3. g3",
@@ -21046,8 +21035,5 @@
     "name": "King's Indian Defense: Orthodox Variation, Classical System, Traditional Line",
     "pgn": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 e5 7. O-O Nc6 8. d5 Ne7 9. Ne1 Nd7 10. f3 f5",
     "fen": "r1bq1rk1/pppnn1bp/3p2p1/3Ppp2/2P1P3/2N2P2/PP2B1PP/R1BQNRK1 w - - 0 11"
-  },
-  {
-    "eco": ""
   }
 ]

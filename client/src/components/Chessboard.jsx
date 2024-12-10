@@ -9,13 +9,15 @@ const BoardComponent = ({ fen }) => {
   useEffect(() => {
     // Instantiate the Stockfish worker
     try {
+      // instantiate the stockfish engine for analysis
       const engine = Stockfish();
+      // set the stockfish worker to the new engine
       setStockfishWorker(engine);
 
-      // Example command to initialize the Stockfish engine
+      // initialize the Stockfish engine
       engine.postMessage("uci");
 
-      // Handle messages from Stockfish
+      //
       engine.onmessage = (event) => {
         console.log("Stockfish response:", event.data); // Log engine output for debugging
       };
@@ -31,7 +33,8 @@ const BoardComponent = ({ fen }) => {
     }
   }, []);
 
-  return <Chessboard position={fen} />;
+  // set the position to the fen prop passed on change from the homepage
+  return <Chessboard position={fen} arePiecesDraggable={false} />;
 };
 
 export default BoardComponent;
