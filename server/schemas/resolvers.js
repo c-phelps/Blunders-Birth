@@ -36,6 +36,19 @@ const resolvers = {
       ]);
       return result;
     },
+    findContinuations: async (_, { orderBy, eco, opening }) => {
+      try {
+        const sortOrder = orderBy && orderBy.name === "ASC" ? 1 : -1;
+        const result = await Opening.find({
+          eco: eco,
+          $and: [{ name: { $regex: opening, $options: "i" } }, { name: { $regex: /:/ } }],
+        }).sort({ name: sortOrder });
+        return result;
+      } catch (err) {
+        console.error(err);
+        throw new Error("Issue finding continuations for eco.");
+      }
+    },
   },
 };
 

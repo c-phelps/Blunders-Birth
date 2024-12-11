@@ -17,6 +17,7 @@ const typeDefs = `
 
     type Query {
         findMainLineOpenings(orderBy: OrderByInput): [Opening]
+        findContinuations(orderBy: OrderByInput, eco: String, opening: String): [Opening]
     }
 `;
 

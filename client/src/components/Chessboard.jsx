@@ -34,7 +34,11 @@ const BoardComponent = ({ fen }) => {
   }, []);
 
   // set the position to the fen prop passed on change from the homepage
-  return <Chessboard position={fen} arePiecesDraggable={false} />;
+  return (
+    <div id="chessboard-container">
+      <Chessboard position={fen} arePiecesDraggable={false} />
+    </div>
+  );
 };
 
 export default BoardComponent;
