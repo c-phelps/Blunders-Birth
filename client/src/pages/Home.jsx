@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useRevalidator, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 // import Auth from "../utils/auth";
 import BoardComponent from "../components/Chessboard";
@@ -13,8 +13,9 @@ const Home = () => {
   const [selectedOpening, setOpening] = useState(null);
   const [selectedEco, setEco] = useState(null);
   const [arrContinuations, setArrContinuations] = useState([]);
+  const [moveDisplay, setMoveDisplay] = useState("");
+  const [currentMove, setCurrentMove] = useState("");
 
-  const moveDisplay = document.querySelector("#moves");
   const openingSelect = document.querySelector("#openings");
 
   // use query to retrieve a selection of openings to allow user to choose from
@@ -47,7 +48,6 @@ const Home = () => {
     // set the moveIndex, the moveBuilder string, and currentState variables that will be used in the setInterval
     let moveIndex = 0;
     let currState = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-    let moveBuilder = "";
     // set our intervalId to the setInterval
     openingSelect.setAttribute("disabled", "disabled");
     const intervalId = setInterval(() => {
@@ -57,10 +57,8 @@ const Home = () => {
         const move = arrMoves[moveIndex].trim();
         // instantiate a new chess object based on the current boardstate
         const chess = new Chess(currState);
-        // adjust the moveBuilder to include the current mvoe
-        moveBuilder += `${move} `;
-        // display the moves in the innterHTML
-        moveDisplay.innerHTML = moveBuilder;
+        // adjust the moveBuilder to include the current move
+        setMoveDisplay((prev) => prev + `${move} `);
         // simple regex check to see if the move is leading with a number and exit loop if so
         // ex "1. " or "2. "
         if (move.match(/^\d+\./)) {
@@ -78,6 +76,7 @@ const Home = () => {
       } else {
         // clear the intervalId after the index has moved past the length of the array
         // reset the openingSelect's value for disabled to enabled
+        setMoveDisplay("");
         openingSelect.removeAttribute("disabled");
         clearInterval(intervalId); // Stop interval when done
       }
@@ -97,7 +96,10 @@ const Home = () => {
     <div className="fullscreen">
       <h1>Welcome :) hello Kristen</h1>
       {loading && <p>Loading...</p>}
-      <select name="opening" id="openings" placeholder="Select an opening!" onChange={handleChange}>
+      <select name="opening" id="openings" placeholder="Select an opening!" onChange={handleChange} defaultValue="">
+        <option value="" disabled>
+          Select an opening!
+        </option>
         {arrOpenings && arrOpenings.length > 0 ? (
           arrOpenings.map((opening, index) => (
             <option key={index} value={opening.name} data-eco={opening.eco} data-seq={opening.pgn}>
@@ -109,11 +111,15 @@ const Home = () => {
         )}
       </select>
       <BoardComponent fen={boardState} arePiecesDraggable={false} />
-      <p id="moves" style={{ fontWeight: "bold" }}></p>
+      <p id="moves" style={{ fontWeight: "bold" }}>
+        {moveDisplay}
+      </p>
       {selectedOpening?.length > 0 && arrContinuations?.length > 0 && (
         <div id="continuations">
-          <Link to="/" state={{ selectedEco, selectedOpening }}>
-            Check out possible continuations for {selectedEco} - {selectedOpening} →
+          <Link to="/continuations" state={{ selectedEco, selectedOpening, arrContinuations, boardState }}>
+            <button>
+              Check out possible continuations for {selectedEco} - {selectedOpening} →
+            </button>
           </Link>
           {arrContinuations.map((continuation, index) => (
             <p key={index}>{continuation.name}</p>

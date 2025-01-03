@@ -19,6 +19,31 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.iconSizing {
+  font-size: 24px;
+  line-height: 1;
+  transition: border 0.2s ease;
+}
+.border {
+  border: 2px solid;
+}
+
+.invisBorder {
+  border: none;
+  visibility: visible;
+}
+
+#faster:focus,
+#fast:focus,
+#slow:focus {
+  outline: none;
+}
+
+.disabledIcons {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .fullscreen {
   display: flex;
   width: 100%;

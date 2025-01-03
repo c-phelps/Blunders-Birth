@@ -1,41 +1,38 @@
 import { Chessboard } from "react-chessboard";
-import { useState, useEffect } from "react";
-import Stockfish from "stockfish.js";
-
+import { useState, useEffect, useRef } from "react";
+import { Stockfish } from "stockfish/src/stockfish-nnue-16";
+// TODO: Get stockfish evaluation to work
 const BoardComponent = ({ fen }) => {
   const [evaluation, setEvaluation] = useState(null);
-  const [stockfishWorker, setStockfishWorker] = useState(null);
+  const [worker, setWorker] = useState(null);
 
   useEffect(() => {
-    // Instantiate the Stockfish worker
-    try {
-      // instantiate the stockfish engine for analysis
-      const engine = Stockfish();
-      // set the stockfish worker to the new engine
-      setStockfishWorker(engine);
-
-      // initialize the Stockfish engine
-      engine.postMessage("uci");
-
-      //
-      engine.onmessage = (event) => {
-        console.log("Stockfish response:", event.data); // Log engine output for debugging
-      };
-
-      // Cleanup on unmount
-      return () => {
-        if (engine) {
-          engine.terminate();
-        }
-      };
-    } catch (error) {
-      console.error("Error initializing Stockfish:", error); // Catch any errors during initialization
-    }
+    const chessWorker = new Worker("/stockfish-worker.js");
+    console.log('Worker initialized:', worker);
+    setWorker(chessWorker);
+    chessWorker.onmessage = (event) => {
+      console.log('Worker message received:', event.data);
+      setEvaluation(event.data);
+    };
+    return () => chessWorker.terminate();
   }, []);
+
+  const analyzePosition = () => {
+    if (worker) {
+      console.log('Sending FEN to worker:', fen);
+      worker.postMessage(fen);
+    }
+    console.log(worker);
+  };
 
   // set the position to the fen prop passed on change from the homepage
   return (
     <div id="chessboard-container">
+      <div>
+        <h1>Chess Position Evaluation</h1>
+        <button onClick={analyzePosition}>Evaluate Position</button>
+        {evaluation !== null && <p>Evaluation: {evaluation > 0 ? `White +${evaluation}` : `Black ${evaluation}`}</p>}
+      </div>
       <Chessboard position={fen} arePiecesDraggable={false} />
     </div>
   );
