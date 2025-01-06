@@ -24,6 +24,7 @@ const ContinuationComponent = () => {
   } = location.state || {};
 
   const [boardState, setBoardState] = useState(startingState);
+  const [clearText, setClearText] = useState(false);
 
   const handleSpeed = (speed) => {
     if (!isDisabled) {
@@ -45,7 +46,8 @@ const ContinuationComponent = () => {
     let moveIndex = 0;
     let currState = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     setMoveDisplay("");
-    // set our intervalId to the setInterval
+    // adjust the clearText boolean to reset the text in the child component
+    setClearText((prev) => !prev);
     openingSelect.setAttribute("disabled", "disabled");
     const intervalId = setInterval(() => {
       // check to see if the moveIndex is < lenght of array
@@ -95,12 +97,7 @@ const ContinuationComponent = () => {
           </option>
         ))}
       </select>
-      <BoardComponent fen={boardState} arePiecesDraggable={false} />
-      <div style={{ minHeight: "110px" }}>
-        <p id="currentMove" style={{ fontWeight: "bold", fontSize: "30px" }}>
-          {currentMove}
-        </p>
-      </div>
+      <BoardComponent fen={boardState} clearText={clearText} arePiecesDraggable={false} />
       <div style={{ display: "flex", gap: "1rem", minHeight: "30px", alignItems: "center" }}>
         <FontAwesomeIcon
           disabled={false}
@@ -140,7 +137,12 @@ const ContinuationComponent = () => {
         <Tooltip id="forward-tooltip" content="2x" />
         <Tooltip id="fast-forward-tooltip" content="3x" />
       </div>
-      <p id="moves" style={{ fontWeight: "bold" }}>
+      <div style={{ minHeight: "50px" }}>
+        <p id="currentMove" style={{ fontWeight: "bold", fontSize: "30px" }}>
+          {currentMove}
+        </p>
+      </div>
+      <p id="moves" style={{ fontWeight: "bold", minHeight: "10px"  }}>
         {moveDisplay}
       </p>
     </div>

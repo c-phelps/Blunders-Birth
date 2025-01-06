@@ -15,6 +15,7 @@ const Home = () => {
   const [arrContinuations, setArrContinuations] = useState([]);
   const [moveDisplay, setMoveDisplay] = useState("");
   const [currentMove, setCurrentMove] = useState("");
+  const [clearText, setClearText] = useState(false);
 
   const openingSelect = document.querySelector("#openings");
 
@@ -50,6 +51,8 @@ const Home = () => {
     let currState = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     // set our intervalId to the setInterval
     openingSelect.setAttribute("disabled", "disabled");
+    // adjust the clearText boolean to reset the text in the child component
+    setClearText((prev) => !prev);
     const intervalId = setInterval(() => {
       // check to see if the moveIndex is < lenght of array
       if (moveIndex < arrMoves.length) {
@@ -110,7 +113,7 @@ const Home = () => {
           <option disabled>Loading openings...</option> // Optional: display a loading message
         )}
       </select>
-      <BoardComponent fen={boardState} arePiecesDraggable={false} />
+      <BoardComponent fen={boardState} clearText={clearText} arePiecesDraggable={false} />
       <p id="moves" style={{ fontWeight: "bold" }}>
         {moveDisplay}
       </p>
