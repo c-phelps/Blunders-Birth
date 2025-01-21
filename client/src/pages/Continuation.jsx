@@ -91,11 +91,16 @@ const ContinuationComponent = () => {
         <option value="" disabled>
           Select a continuation!
         </option>
-        {arrContinuations.map((continuation, index) => (
-          <option key={index} value={continuation.name} data-eco={continuation.eco} data-seq={continuation.pgn}>
-            {continuation.eco} - {continuation.name}
-          </option>
-        ))}
+
+        {arrContinuations && arrContinuations.length > 0 ? (
+          arrContinuations.map((continuation, index) => (
+            <option key={index} value={continuation.name} data-eco={continuation.eco} data-seq={continuation.pgn}>
+              {continuation.eco} - {continuation.name}
+            </option>
+          ))
+        ) : (
+          <p>Loading openings...</p>
+        )}
       </select>
       <BoardComponent fen={boardState} clearText={clearText} arePiecesDraggable={false} />
       <div style={{ display: "flex", gap: "1rem", minHeight: "30px", alignItems: "center" }}>
@@ -142,7 +147,7 @@ const ContinuationComponent = () => {
           {currentMove}
         </p>
       </div>
-      <p id="moves" style={{ fontWeight: "bold", minHeight: "10px"  }}>
+      <p id="moves" style={{ fontWeight: "bold", minHeight: "10px" }}>
         {moveDisplay}
       </p>
     </div>

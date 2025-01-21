@@ -44,6 +44,8 @@ const Home = () => {
     const eco = event.target.options[event.target.selectedIndex].dataset.eco;
     const seq = event.target.options[event.target.selectedIndex].dataset.seq;
     const arrMoves = seq.split(" ");
+    // when a new opening is selected, reset the move counter
+    setMoveDisplay("");
     // reset board
     setBoardState("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
     // set the moveIndex, the moveBuilder string, and currentState variables that will be used in the setInterval
@@ -79,7 +81,6 @@ const Home = () => {
       } else {
         // clear the intervalId after the index has moved past the length of the array
         // reset the openingSelect's value for disabled to enabled
-        setMoveDisplay("");
         openingSelect.removeAttribute("disabled");
         clearInterval(intervalId); // Stop interval when done
       }
@@ -97,7 +98,7 @@ const Home = () => {
   //  on the boardcomponent use stockfish engine to analyze and return a mp +/- advantage for the position when each new variation is selected
   return (
     <div className="fullscreen">
-      <h1>Welcome :) hello Kristen</h1>
+      <h1>Welcome to Blunder's Birth</h1>
       {loading && <p>Loading...</p>}
       <select name="opening" id="openings" placeholder="Select an opening!" onChange={handleChange} defaultValue="">
         <option value="" disabled>
@@ -124,9 +125,11 @@ const Home = () => {
               Check out possible continuations for {selectedEco} - {selectedOpening} →
             </button>
           </Link>
-          {arrContinuations.map((continuation, index) => (
-            <p key={index}>{continuation.name}</p>
-          ))}
+          {arrContinuations && arrContinuations.length > 0 ? (
+            arrContinuations.map((continuation, index) => <p key={index}>{continuation.name}</p>)
+          ) : (
+            <p>Loading openings...</p>
+          )}
         </div>
       )}
       {selectedOpening?.length > 0 && arrContinuations?.length === 0 && <p>No continuation found</p>}
