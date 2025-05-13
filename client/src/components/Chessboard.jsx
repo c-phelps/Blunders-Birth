@@ -52,8 +52,12 @@ const BoardComponent = ({ fen, clearText }) => {
         <Col>
           <p>Chess Position Evaluation</p>
           <button onClick={analyzePosition}>Evaluate Position</button>
-          {evaluation !== null && (
+          {evaluation !== null ? (
             <p id="eval">Evaluation: {evaluation > 0 ? `White +${evaluation}` : `Black ${evaluation}`}</p>
+          ) : (
+            <p id="eval">
+              Stockfish will not work with Render deployment :( - for full evaluation with depth see the github version
+            </p>
           )}
         </Col>
 

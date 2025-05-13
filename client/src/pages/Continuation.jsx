@@ -49,6 +49,7 @@ const ContinuationComponent = () => {
     // adjust the clearText boolean to reset the text in the child component
     setClearText((prev) => !prev);
     openingSelect.setAttribute("disabled", "disabled");
+    
     const intervalId = setInterval(() => {
       // check to see if the moveIndex is < lenght of array
       if (moveIndex < arrMoves.length) {
