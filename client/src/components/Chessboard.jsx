@@ -12,7 +12,6 @@ const BoardComponent = ({ fen, clearText }) => {
   useEffect(() => {
     const chessWorker = new Worker("/stockfish-worker.js");
     setWorker(chessWorker);
-    console.log(location.pathname);
     chessWorker.onmessage = (event) => {
       let parsedData = parseFloat(event.data);
       if (!isNaN(parsedData)) {
@@ -34,6 +33,7 @@ const BoardComponent = ({ fen, clearText }) => {
       worker.postMessage(fen);
     }
   };
+  
   const BackButton = () => {
     if (location.pathname === "/continuations") {
       return (

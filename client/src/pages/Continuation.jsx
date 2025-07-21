@@ -51,13 +51,13 @@ const ContinuationComponent = () => {
     openingSelect.setAttribute("disabled", "disabled");
     
     const intervalId = setInterval(() => {
-      // check to see if the moveIndex is < lenght of array
+      // make sure we are still in the array boundaries
       if (moveIndex < arrMoves.length) {
         // set the move variable to the array at the current index
         const move = arrMoves[moveIndex].trim();
         // instantiate a new chess object based on the current boardstate
         const chess = new Chess(currState);
-        // adjust the moveBuilder to include the current mvoe
+        // adjust the moveBuilder to include the current move
         setMoveDisplay((prev) => prev + `${move} `);
         // simple regex check to see if the move is leading with a number and exit loop if so
         // ex "1. " or "2. "
