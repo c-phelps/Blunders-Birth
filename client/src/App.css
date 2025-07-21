@@ -24,14 +24,8 @@
   line-height: 1;
   transition: border 0.2s ease;
 }
-.border {
-  border: 2px solid rgb(190, 9, 9) !important;
-}
 
-.invisBorder {
-  border: none;
-  visibility: visible;
-}
+
 
 #faster:focus,
 #fast:focus,
@@ -39,18 +33,9 @@
   outline: none;
 }
 
-.disabledIcons {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
 
-.fullscreen {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+
+
 
 #chessboard-container {
   display: flex;

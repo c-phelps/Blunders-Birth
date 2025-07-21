@@ -33,7 +33,7 @@ const BoardComponent = ({ fen, clearText }) => {
       worker.postMessage(fen);
     }
   };
-  
+
   const BackButton = () => {
     if (location.pathname === "/continuations") {
       return (
@@ -56,7 +56,8 @@ const BoardComponent = ({ fen, clearText }) => {
             <p id="eval">Evaluation: {evaluation > 0 ? `White +${evaluation}` : `Black ${evaluation}`}</p>
           ) : (
             <p id="eval">
-              Stockfish will not work with Render deployment :( - for full evaluation with depth see the github version
+              Render free deployment will not serve the files required to allow for evaluation - For full
+              evaluation/analysis with depth deploy locally from github version
             </p>
           )}
         </Col>

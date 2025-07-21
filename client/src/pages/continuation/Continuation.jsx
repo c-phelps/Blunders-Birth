@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faForward, faPlay, faForwardFast } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "react-tooltip";
 import { useLocation } from "react-router-dom";
-import BoardComponent from "../components/Chessboard";
+import BoardComponent from "../../components/Chessboard";
 import { Chess } from "chess.js";
+import styles from "./Continuation.module.css";
 
 const ContinuationComponent = () => {
   const [activeSpeed, setActiveSpeed] = useState(1000);
@@ -49,7 +50,7 @@ const ContinuationComponent = () => {
     // adjust the clearText boolean to reset the text in the child component
     setClearText((prev) => !prev);
     openingSelect.setAttribute("disabled", "disabled");
-    
+
     const intervalId = setInterval(() => {
       // make sure we are still in the array boundaries
       if (moveIndex < arrMoves.length) {
@@ -80,11 +81,12 @@ const ContinuationComponent = () => {
         openingSelect.removeAttribute("disabled");
         setDisabled(false);
         clearInterval(intervalId); // Stop interval when done
+        setCurrentMove(""); // Clear current move after finishing
       }
     }, playSpeed.current);
   };
   return (
-    <div className="fullscreen">
+    <div className={styles.fullscreen}>
       <h1>
         {eco} - {opening}
       </h1>
@@ -104,53 +106,62 @@ const ContinuationComponent = () => {
         )}
       </select>
       <BoardComponent fen={boardState} clearText={clearText} arePiecesDraggable={false} />
-      <div style={{ display: "flex", gap: "1rem", minHeight: "30px", alignItems: "center" }}>
-        <FontAwesomeIcon
-          disabled={false}
-          cursor="pointer"
-          icon={faPlay}
-          className={`${activeSpeed === 1000 ? "border" : "invisBorder"} ${isDisabled ? "disabledIcons" : ""}`}
-          data-tooltip-id="play-tooltip"
-          id="slow"
-          onClick={() => {
-            handleSpeed(1000);
-          }}
-        />
-        <FontAwesomeIcon
-          disabled={false}
-          cursor="pointer"
-          className={`${activeSpeed === 700 ? "border" : "invisBorder"} ${isDisabled ? "disabledIcons" : ""}`}
-          data-tooltip-id="forward-tooltip"
-          id="fast"
-          icon={faForward}
-          onClick={() => {
-            handleSpeed(700);
-          }}
-        />
-        <FontAwesomeIcon
-          disabled={false}
-          cursor="pointer"
-          className={`${activeSpeed === 300 ? "border" : "invisBorder"} ${isDisabled ? "disabledIcons" : ""}`}
-          data-tooltip-id="fast-forward-tooltip"
-          id="faster"
-          icon={faForwardFast}
-          onClick={() => {
-            handleSpeed(300);
-          }}
-        />
+      <div className={styles.speedContainer}>
+        Play Speed
+        <div className={styles.speedControlsContainer}>
+          <FontAwesomeIcon
+            disabled={false}
+            cursor="pointer"
+            icon={faPlay}
+            className={`${activeSpeed === 1000 ? `${styles.border}` : `${styles.invisBorder}`} ${
+              isDisabled ? `${styles.disabledIcons}` : ""
+            }`}
+            data-tooltip-id="play-tooltip"
+            id="slow"
+            onClick={() => {
+              handleSpeed(1000);
+            }}
+          />
+          <FontAwesomeIcon
+            disabled={false}
+            cursor="pointer"
+            className={`${activeSpeed === 700 ? `${styles.border}` : `${styles.invisBorder}`} ${
+              isDisabled ? `${styles.disabledIcons}` : ""
+            }`}
+            data-tooltip-id="forward-tooltip"
+            id="fast"
+            icon={faForward}
+            onClick={() => {
+              handleSpeed(700);
+            }}
+          />
+          <FontAwesomeIcon
+            disabled={false}
+            cursor="pointer"
+            className={`${activeSpeed === 300 ? `${styles.border}` : `${styles.invisBorder}`} ${
+              isDisabled ? `${styles.disabledIcons}` : ""
+            }`}
+            data-tooltip-id="fast-forward-tooltip"
+            id="faster"
+            icon={faForwardFast}
+            onClick={() => {
+              handleSpeed(300);
+            }}
+          />
 
-        <Tooltip id="play-tooltip" content="1x" />
-        <Tooltip id="forward-tooltip" content="2x" />
-        <Tooltip id="fast-forward-tooltip" content="3x" />
+          <Tooltip id="play-tooltip" content="1x" />
+          <Tooltip id="forward-tooltip" content="2x" />
+          <Tooltip id="fast-forward-tooltip" content="3x" />
+        </div>
       </div>
-      <div style={{ minHeight: "50px" }}>
-        <p id="currentMove" style={{ fontWeight: "bold", fontSize: "30px" }}>
-          {currentMove}
+      <div className={styles.currentMoveContainter}>
+        <p>{currentMove}</p>
+      </div>
+      <div className={styles.moveListContainer}>
+        <p id="moves" style={{ fontWeight: "bold", minHeight: "10px" }}>
+          {moveDisplay}
         </p>
       </div>
-      <p id="moves" style={{ fontWeight: "bold", minHeight: "10px" }}>
-        {moveDisplay}
-      </p>
     </div>
   );
 };

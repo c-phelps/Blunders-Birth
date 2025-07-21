@@ -115,9 +115,10 @@ const Home = () => {
         )}
       </select>
       <BoardComponent fen={boardState} clearText={clearText} arePiecesDraggable={false} />
-      <p id="moves" style={{ fontWeight: "bold" }}>
+      <p id="moves" style={{ fontWeight: "bold", minHeight: "30px", minWidth: "1px" }}>
         {moveDisplay}
       </p>
+
       {selectedOpening?.length > 0 && arrContinuations?.length > 0 && (
         <div id="continuations">
           <Link to="/continuations" state={{ selectedEco, selectedOpening, arrContinuations, boardState }}>
@@ -126,6 +127,7 @@ const Home = () => {
             </button>
           </Link>
           {arrContinuations && arrContinuations.length > 0 ? (
+            
             arrContinuations.map((continuation, index) => <p key={index}>{continuation.name}</p>)
           ) : (
             <p>Loading openings...</p>
