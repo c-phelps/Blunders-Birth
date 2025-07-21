@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 // import Auth from "../utils/auth";
-import BoardComponent from "../components/Chessboard";
-import { OPENINGS_ASC, FIND_CONTINUATIONS } from "../utils/queries";
+import BoardComponent from "../../components/Chessboard";
+import { OPENINGS_ASC, FIND_CONTINUATIONS } from "../../utils/queries";
 import { Chess } from "chess.js";
+
+// TODO: Cleanup CSS/Styling, have a more intuitive UI for landing page
+// TODO: Disable the evaluation button
+// TODO: Add more here
 
 // set up homepage function that will return the jsx 'HTML' for the home-page
 const Home = () => {

@@ -40,8 +40,10 @@
   min-width: 1px;
   padding: 0;
 }
-.currentMoveContainter > p {    
+.currentMoveContainter > p {
   font-weight: bold;
   font-size: 30px;
   margin: 0;
 }
+
+

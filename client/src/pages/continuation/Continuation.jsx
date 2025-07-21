@@ -7,6 +7,8 @@ import BoardComponent from "../../components/Chessboard";
 import { Chess } from "chess.js";
 import styles from "./Continuation.module.css";
 
+// TODO: Add replay button
+
 const ContinuationComponent = () => {
   const [activeSpeed, setActiveSpeed] = useState(1000);
   const playSpeed = useRef(activeSpeed);

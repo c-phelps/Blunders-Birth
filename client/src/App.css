@@ -44,9 +44,10 @@
   aspect-ratio: 1;
   /* center this */
 }
-#continuations {
+
+/* #continuations {
   text-align: left;
-}
+} */
 
 @keyframes logo-spin {
   from {
