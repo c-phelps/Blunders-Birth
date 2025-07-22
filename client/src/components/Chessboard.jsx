@@ -51,7 +51,8 @@ const BoardComponent = ({ fen, clearText }) => {
       <div className={styles.welcomeText}>
         <p>
           Welcome to Blunder's Birth a site where you can learn and study book openings for chess! To get started,
-          select an opening from the drop down menu above the chess board!
+          select an opening from the drop down menu above the chess board. Then you can see potential continuations by
+          clicking the button below the chess board!
         </p>
       </div>
     );
