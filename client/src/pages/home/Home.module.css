@@ -1,0 +1,23 @@
+.continuationDisplay {
+  min-height: 100px;
+  max-height: 300px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.movesDisplay {
+  font-weight: bold;
+  min-height: 30px;
+  min-width: 1px;
+}
+
+.fullscreen {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;           
+  scrollbar-gutter: stable;   
+  height: 100vh;  
+}

@@ -6,7 +6,7 @@ import { Stockfish } from "stockfish/src/stockfish-nnue-16";
 import styles from "./Chessboard.module.css";
 import { Tooltip } from "react-tooltip";
 
-// TODO: Get stockfish evaluation to work
+// TODO: Get stockfish evaluation to work with render deploy
 const BoardComponent = ({ fen, clearText }) => {
   const [evaluation, setEvaluation] = useState(null);
   const [worker, setWorker] = useState(null);
@@ -60,8 +60,8 @@ const BoardComponent = ({ fen, clearText }) => {
 
   // set the position to the fen prop passed on change from the homepage
   return (
-    <Container className="text-center">
-      <Row className="align-items-start">
+    <Container className={styles.chessboardContainer}>
+      <Row className={styles.chessboardRows}>
         <Col className={styles.columnContainers}>
           <p>Chess Position Evaluation</p>
           <button onClick={analyzePosition} data-tooltip-id="eval-button">

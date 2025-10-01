@@ -37,13 +37,7 @@
 
 
 
-#chessboard-container {
-  display: flex;
-  width: 40%;
-  /* max-width: 400px; */
-  aspect-ratio: 1;
-  /* center this */
-}
+
 
 /* #continuations {
   text-align: left;

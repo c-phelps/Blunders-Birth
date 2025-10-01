@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import BoardComponent from "../../components/Chessboard";
 import { OPENINGS_ASC, FIND_CONTINUATIONS } from "../../utils/queries";
 import { Chess } from "chess.js";
+import styles from "./Home.module.css";
 
 // TODO: Cleanup CSS/Styling, have a more intuitive UI for landing page
 // TODO: Disable the evaluation button
@@ -101,7 +102,7 @@ const Home = () => {
   // when the user selects a variation, display the specific variation based on the fen
   //  on the boardcomponent use stockfish engine to analyze and return a mp +/- advantage for the position when each new variation is selected
   return (
-    <div className="fullscreen">
+    <div className={styles.fullscreen}>
       <h1>Welcome to Blunder's Birth</h1>
       {loading && <p>Loading...</p>}
       <select name="opening" id="openings" placeholder="Select an opening!" onChange={handleChange} defaultValue="">
@@ -119,26 +120,27 @@ const Home = () => {
         )}
       </select>
       <BoardComponent fen={boardState} clearText={clearText} arePiecesDraggable={false} />
-      <p id="moves" style={{ fontWeight: "bold", minHeight: "30px", minWidth: "1px" }}>
+      <p className={styles.movesDisplay}>
         {moveDisplay}
+        {console.log(styles)}
       </p>
-
-      {selectedOpening?.length > 0 && arrContinuations?.length > 0 && (
-        <div id="continuations">
-          <Link to="/continuations" state={{ selectedEco, selectedOpening, arrContinuations, boardState }}>
-            <button>
-              Check out possible continuations for {selectedEco} - {selectedOpening} →
-            </button>
-          </Link>
-          {arrContinuations && arrContinuations.length > 0 ? (
-            
-            arrContinuations.map((continuation, index) => <p key={index}>{continuation.name}</p>)
-          ) : (
-            <p>Loading openings...</p>
-          )}
-        </div>
-      )}
-      {selectedOpening?.length > 0 && arrContinuations?.length === 0 && <p>No continuation found</p>}
+      <div className={styles.continuationDisplay}>
+        {selectedOpening?.length > 0 && arrContinuations?.length > 0 && (
+          <div >
+            <Link to="/continuations" state={{ selectedEco, selectedOpening, arrContinuations, boardState }}>
+              <button>
+                Check out possible continuations for {selectedEco} - {selectedOpening} →
+              </button>
+            </Link>
+            {arrContinuations && arrContinuations.length > 0 ? (
+              arrContinuations.map((continuation, index) => <p key={index}>{continuation.name}</p>)
+            ) : (
+              <p>Loading openings...</p>
+            )}
+          </div>
+        )}
+        {selectedOpening?.length > 0 && arrContinuations?.length === 0 && <p>No continuation found</p>}
+      </div>
     </div>
   );
 };

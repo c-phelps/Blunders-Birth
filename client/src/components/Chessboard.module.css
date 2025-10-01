@@ -18,3 +18,16 @@
   max-width: 400px;
   z-index: 1000;
 }
+
+.chessboardContainer {
+  /* display: flex;
+  width: 40%;
+  aspect-ratio: 1;
+  min-height: 500px; */
+  min-height: 290px;;
+}
+
+.chessboardRows {
+  min-height: 290px;
+  align-items: start;
+}
