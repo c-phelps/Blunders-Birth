@@ -87,6 +87,7 @@ const ContinuationComponent = () => {
       }
     }, playSpeed.current);
   };
+  
   return (
     <div className={styles.fullscreen}>
       <h1>
